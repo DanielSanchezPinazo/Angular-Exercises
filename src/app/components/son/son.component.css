@@ -1,0 +1,14 @@
+
+.child {
+
+  border: solid red 5px;
+  text-align: center;
+  height: 150px;
+  margin: 10px;;
+}
+
+
+.btn {
+
+  margin: 4px;
+}
