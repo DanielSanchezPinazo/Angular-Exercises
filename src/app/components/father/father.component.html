@@ -1,9 +1,9 @@
 
 <div class="father">
   <h1>Parent</h1>
-  <p>message: {{ sonMessage }} </p>
-  <button class="btn btn-primary">Use Service</button>
+  <p>message: {{ message$ ? message$ : sonMessage }} </p>
+  <button (click)="serviceMessage()" class="btn btn-primary">Use Service</button>
   <button (click)="sendMessage()" class="btn btn-primary">Use Input Property</button>
-  <button class="btn btn-primary">Use Observable</button>
+  <button (click)="sendMessage$()" class="btn btn-primary">Use Observable</button>
   <app-son [inputMessage]="fatherMessage" (outputMessage)="receiveMessage($event)"></app-son>
 </div>

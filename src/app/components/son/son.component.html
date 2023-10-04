@@ -1,8 +1,8 @@
 
 <div class="child">
   <h2>Child</h2>
-  <p>message: {{ inputMessage }} </p>
-  <button class="btn btn-primary">Use Service</button>
+  <p>message: {{ message$ ? message$ : inputMessage }} </p>
+  <button (click)="serviceMessage()" class="btn btn-primary">Use Service</button>
   <button (click)="emitMessage()" class="btn btn-primary">Use Output Event</button>
-  <button class="btn btn-primary">Use Observable</button>
+  <button (click)="sendMessage$()" class="btn btn-primary">Use Observable</button>
 </div>
