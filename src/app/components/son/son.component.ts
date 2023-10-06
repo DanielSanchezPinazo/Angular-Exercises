@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit, inject } from '@angular/core';
+import { Subject } from 'rxjs';
 import { ComunicationService } from 'src/app/services/comunication.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class SonComponent implements OnInit {
   public fatherMessage: string = "";
   public sonService = inject(ComunicationService);
   public message$ = "";
+  private unsubscribe$ = new Subject<void>();
 
   ngOnInit(): void {
 
@@ -46,5 +48,11 @@ export class SonComponent implements OnInit {
   public sendMessage$() {
 
     this.sonService.setFather$("CHILD USING SUBJECT");
+  };
+
+  public unsuscribe$() {
+
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
   };
 }
