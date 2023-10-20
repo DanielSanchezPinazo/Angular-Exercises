@@ -1,0 +1,24 @@
+<div class="row">
+
+  <div class="col-3 m-4">
+    <h2><strong>Países </strong>- Elige Región</h2>
+    <hr>
+
+    <button *ngFor="let region of regions" class="btn mx-2"
+      [ngClass]="{ 'btn-outline-primary': selectedRegion === region }" (click)="searchByRegion( region );">
+      <strong>{{ region }}</strong>
+    </button>
+  </div>
+
+  <div class="col-8 mr-2">
+
+    <div *ngIf="selectedRegion">
+      <countries-seeker [countriesT]="countriesR"></countries-seeker>
+    </div>
+
+    <div *ngIf="!selectedRegion" class="alert alert-warning text-center mt-2">
+      No hay Región seleccionada
+    </div>
+
+  </div>
+</div>

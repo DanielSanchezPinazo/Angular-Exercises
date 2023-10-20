@@ -6,6 +6,10 @@ import { LayoutComponent } from './components/layout/layout.component';
 import { FormsModule } from '@angular/forms';
 import { FatherComponent } from './components/component comunication/father/father.component';
 import { SonComponent } from './components/component comunication/son/son.component';
+import { SidebarComponent } from './components/countries/sidebar/sidebar.component';
+import { SeekerComponent } from './components/countries/seeker/seeker.component';
+import { HttpClientModule } from '@angular/common/http';
+
 
 @NgModule({
   declarations: [
@@ -13,11 +17,14 @@ import { SonComponent } from './components/component comunication/son/son.compon
     LayoutComponent,
     FatherComponent,
     SonComponent,
+    SidebarComponent,
+    SeekerComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

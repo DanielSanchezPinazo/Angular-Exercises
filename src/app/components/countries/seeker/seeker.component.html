@@ -1,0 +1,26 @@
+<input type="text" [placeholder]="placeholder" [value]="initValue" class="form-control"
+  (keyup)="onKeyPress(txtInput.value)" #txtInput>
+
+<table class="table table-striped mt-2">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Bandera</th>
+      <th scope="col">Nombre</th>
+      <th scope="col">Capital</th>
+      <th scope="col">Población</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let country of countriesT; index as i">
+      <td>{{ i + 1 }}</td>
+      <td>
+        <img [src]="country.flags.svg" alt="Bandera no disponible">
+      </td>
+      <td>{{ country.name.common }}</td>
+      <td>{{ country.capital }}</td>
+      <td>{{ country.population | number }}</td>
+    </tr>
+  </tbody>
+</table>
