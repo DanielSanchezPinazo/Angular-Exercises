@@ -1,0 +1,23 @@
+
+.container {
+
+  position: fixed;
+  left: 350px;
+}
+
+.options {
+
+  display: flex;
+}
+
+label {
+
+  color: blue;
+  margin-bottom: 10px;
+}
+
+.form-select {
+
+  width: 300px;
+  margin-right: 50px;
+}

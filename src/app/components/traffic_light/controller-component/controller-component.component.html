@@ -1,0 +1,25 @@
+
+<div class="container">
+
+  <label><h3><strong>Controlador</strong></h3></label>
+
+  <div class="options">
+
+    <select class="form-select" aria-label="Select" [(ngModel)]="value" (change)="selectValue()" [disabled]="!isChecked">
+      <option value="rojo" selected>Rojo</option>
+      <option value="naranja">Naranja</option>
+      <option value="verde">Verde</option>
+    </select>
+
+    <div class="form-check">
+      <input class="form-check-input" type="checkbox" value="" id="flexCheck"
+        [(ngModel)]="isChecked" (change)="checkOn()">
+      <label class="form-check-label" for="flexCheckDefault">
+        Encendido / Apagado
+      </label>
+    </div>
+
+  </div>
+
+</div>
+
