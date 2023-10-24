@@ -9,12 +9,12 @@ export class TrafficService {
   private _onOff$ = new BehaviorSubject<boolean>(false);
   public _color$ = new BehaviorSubject<string>("rojo");
 
-  public setOnOff( value: boolean ) {
+  public toggleTrafficLight( value: boolean ) {
 
     this._onOff$.next( value );
   };
 
-  public getOnOff$() {
+  public isActive$() {
 
     return this._onOff$.asObservable();
   };

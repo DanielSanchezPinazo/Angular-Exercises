@@ -10,8 +10,8 @@ import { SidebarComponent } from './components/countries/sidebar/sidebar.compone
 import { SeekerComponent } from './components/countries/seeker/seeker.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LightSwitchComponent } from './components/traffic_light/light-switch/light-switch.component';
-import { TraficLightComponentComponent } from './components/traffic_light/trafic-light-component/trafic-light-component.component';
-import { ControllerComponentComponent } from './components/traffic_light/controller-component/controller-component.component';
+import { TraficLightComponent } from './components/traffic_light/trafic-light-component/trafic-light.component';
+import { ControllerComponent } from './components/traffic_light/controller-component/controller.component';
 
 
 @NgModule({
@@ -23,8 +23,8 @@ import { ControllerComponentComponent } from './components/traffic_light/control
     SidebarComponent,
     SeekerComponent,
     LightSwitchComponent,
-    TraficLightComponentComponent,
-    ControllerComponentComponent
+    TraficLightComponent,
+    ControllerComponent
   ],
   imports: [
     BrowserModule,

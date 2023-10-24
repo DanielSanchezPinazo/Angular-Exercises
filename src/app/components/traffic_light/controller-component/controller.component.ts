@@ -3,10 +3,10 @@ import { TrafficService } from 'src/app/services/traffic.service';
 
 @Component({
   selector: 'controller-component',
-  templateUrl: './controller-component.component.html',
-  styleUrls: ['./controller-component.component.css']
+  templateUrl: './controller.component.html',
+  styleUrls: ['./controller.component.css']
 })
-export class ControllerComponentComponent {
+export class ControllerComponent {
 
   private _trafficService = inject( TrafficService );
   public isChecked: boolean = false;
@@ -14,22 +14,22 @@ export class ControllerComponentComponent {
 
   public selectValue() {
 
-      console.log( this.value );
+      // console.log( this.value );
       this._trafficService.setColor( this.value );
       // this._trafficService.getColor$().subscribe( val => console.log(val));
   };
 
-  public checkOn() {
+  public turnOnOff() {
 
   if (this.isChecked) {
 
     console.log("Encendido");
-    this._trafficService.setOnOff( true );
+    this._trafficService.toggleTrafficLight( true );
 
   } else {
 
     console.log("Apagado");
-    this._trafficService.setOnOff( false );
+    this._trafficService.toggleTrafficLight( false );
   };
 };
 }
