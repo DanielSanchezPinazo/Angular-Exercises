@@ -20,13 +20,13 @@ export class CountriesService {
       );
   };
 
-  searchCountry( term: string ): Observable<Country[]> {
+  public searchCountry( term: string ): Observable<Country[]> {
 
     const url = `${this.apiUrl}/name/${term}`;
     return this.getCountriesRequest( url );
   };
 
-  searchRegion( region: Region ): Observable<Country[]> {
+  public searchRegion( region: Region ): Observable<Country[]> {
 
     const url = `${this.apiUrl}/region/${region}`;
     return this.getCountriesRequest( url );

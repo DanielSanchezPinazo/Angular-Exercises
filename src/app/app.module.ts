@@ -12,6 +12,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { LightSwitchComponent } from './components/traffic_light/light-switch/light-switch.component';
 import { TraficLightComponent } from './components/traffic_light/trafic-light-component/trafic-light.component';
 import { ControllerComponent } from './components/traffic_light/controller-component/controller.component';
+import { ExternalLibraryComponent } from './components/external-library/external-library.component';
+import { NgApexchartsModule } from "ng-apexcharts";
 
 
 @NgModule({
@@ -24,13 +26,15 @@ import { ControllerComponent } from './components/traffic_light/controller-compo
     SeekerComponent,
     LightSwitchComponent,
     TraficLightComponent,
-    ControllerComponent
+    ControllerComponent,
+    ExternalLibraryComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgApexchartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
