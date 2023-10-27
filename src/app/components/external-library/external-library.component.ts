@@ -21,7 +21,7 @@ export class ExternalLibraryComponent implements OnInit {
     this.muestra();
   };
 
-  muestra() {
+  public muestra() {
 
     this.externalService.getRequest().subscribe( res =>{
 
