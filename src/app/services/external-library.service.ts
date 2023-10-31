@@ -9,7 +9,7 @@ import { catchError, map, of, take, tap } from 'rxjs';
 export class ExternalLibraryService {
 
   private apikey: string = "&apikey=p44c5L4dPWyz3frqDk0Byg6lAenyyUX9";
-  private baseUrl: string = "https://financialmodelingprep.com/api/v3/stock-screener?limit=20";
+  private baseUrl: string = "https://financialmodelingprep.com/api/v3/stock-screener?limit=10";
   private url: string = `${ this.baseUrl  }${ this.apikey }`;
   private http = inject( HttpClient );
 
@@ -28,6 +28,7 @@ export class ExternalLibraryService {
           price: company.price,
           exchange: company.exchangeShortName,
           country: company.country,
+          volume: company.volume
         }
       })),
       catchError( error => of([]))

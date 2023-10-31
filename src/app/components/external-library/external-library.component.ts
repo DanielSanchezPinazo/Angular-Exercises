@@ -1,8 +1,8 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
+import { AfterViewInit, Component, ViewChild, inject } from '@angular/core';
 import { ExternalLibraryService } from 'src/app/services/external-library.service';
 import { ShortCompany } from './interfaces/company.interface';
 
-import { Chart, ChartItem } from 'chart.js/auto';
+import * as Chartist from 'chartist';
 
 @Component({
   selector: 'external-library',
@@ -14,54 +14,59 @@ export class ExternalLibraryComponent implements AfterViewInit {
   public companies: ShortCompany[] = [];
   public prices: number[] = [];
   public names: string[] = [];
+  public volumes: number[] = [];
   private externalService = inject(ExternalLibraryService);
+  public data1: any;
+  public data2: any;
 
   @ViewChild('myChart', { static: true })
   chart!: HTMLCanvasElement;
 
 
-  ngAfterViewInit(): void {
+ ngAfterViewInit(): void{
 
     this.muestra();
   };
 
-  public muestra() {
-
-    if ( this.chart ) {
-
-
-      new Chart(this.chart, {
-        type: 'bar',
-        data: {
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            borderWidth: 1
-          }]
-        },
-        options: {
-          scales: {
-            y: {
-              beginAtZero: true
-            }
-          }
-        }
-      });
-
-    }
+    public muestra() {
 
     this.externalService.getRequest().subscribe(res => {
 
-      console.log(res);
       this.companies = res;
+      console.log( this.companies );
       res.map(company => {
 
         this.prices.push(company.price);
         this.names.push(company.symbol);
+        this.volumes.push(company.volume / 1000);
       });
+
       console.log(this.prices);
       console.log(this.names);
+      console.log(this.volumes);
+
+      this.data1 = {
+        // A labels array that can contain any sort of values
+        labels:
+        this.names,
+        // Our series array that contains series objects or in this case series data arrays
+        series: [
+          this.prices
+        ]
+      };
+
+      this.data2 = {
+
+        labels:
+        this.names,
+
+        series: [
+          this.volumes
+        ]
+      };
+
+      new Chartist.BarChart('#chart1', this.data1);
+      new Chartist.LineChart('#chart2', this.data2);
     });
   };
 }

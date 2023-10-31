@@ -28,4 +28,5 @@ export interface ShortCompany {
   price:              number;
   exchange:           string;
   country:            string;
+  volume:             number;
 }
