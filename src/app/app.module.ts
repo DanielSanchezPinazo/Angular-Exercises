@@ -14,6 +14,7 @@ import { TraficLightComponent } from './components/traffic_light/trafic-light-co
 import { ControllerComponent } from './components/traffic_light/controller-component/controller.component';
 import { ExternalLibraryComponent } from './components/external-library/external-library.component';
 import { NgApexchartsModule } from "ng-apexcharts";
+import { CounterComponent } from './components/counter/counter.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { NgApexchartsModule } from "ng-apexcharts";
     LightSwitchComponent,
     TraficLightComponent,
     ControllerComponent,
-    ExternalLibraryComponent
+    ExternalLibraryComponent,
+    CounterComponent
   ],
   imports: [
     BrowserModule,

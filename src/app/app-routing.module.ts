@@ -5,6 +5,7 @@ import { FatherComponent } from './components/component comunication/father/fath
 import { SidebarComponent } from './components/countries/sidebar/sidebar.component';
 import { LightSwitchComponent } from './components/traffic_light/light-switch/light-switch.component';
 import { ExternalLibraryComponent } from './components/external-library/external-library.component';
+import { CounterComponent } from './components/counter/counter.component';
 
 const routes: Routes = [
 
@@ -23,6 +24,10 @@ const routes: Routes = [
   {
     path: "external-library",
     component: ExternalLibraryComponent
+  },
+  {
+    path: "counter",
+    component: CounterComponent
   }
 ];
 
