@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
 export class TrafficService {
 
   private _onOff$ = new BehaviorSubject<boolean>(false);
-  public _color$ = new BehaviorSubject<string>("rojo");
+  private _color$ = new BehaviorSubject<string>("rojo");
 
   public toggleTrafficLight( value: boolean ) {
 

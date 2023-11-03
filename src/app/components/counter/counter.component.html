@@ -1,1 +1,32 @@
-<p>counter works!</p>
+
+<div class="container">
+
+  <h1> {{ counterNumber }} </h1>
+
+  <h5>Setup</h5>
+  <div class="btn-group mb-4" role="group" aria-label="setup">
+    <button type="button" class="btn btn-success" (click)="counter()">Start</button>
+    <button type="button" class="btn btn-warning" (click)="pause()">Pause</button>
+    <button type="button" class="btn btn-danger" (click)="reset()">Reset</button>
+  </div>
+
+  <h5>Count</h5>
+  <div class="btn-group mb-4" role="group" aria-label="setup">
+    <button type="button" class="btn btn-primary" (click)="counterUp()">Count Up</button>
+    <button type="button" class="btn btn-primary" (click)="counterDown()">Count Down</button>
+  </div>
+
+  <h5>Set to</h5>
+  <div class="short mb-4">
+    <input [(ngModel)]="setInput" type="text" class="form-control" placeholder="0" aria-label="set-up" aria-describedby="basic-addon">
+  </div>
+
+  <h5>Step</h5>
+  <div class="short mb-4">
+    <input id="stepInput" type="number" min="1" max="6" class="form-control" placeholder="0" aria-label="step" aria-describedby="basic-addon2">
+  </div>
+
+  <p>{{ counterNumber }} | "active": {{ active }} | "countUp": {{ countUp }} | "value": {{ setInput }} | "step": {{ stepValue }}</p>
+
+</div>
+
