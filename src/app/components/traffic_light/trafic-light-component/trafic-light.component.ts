@@ -1,4 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { TrafficService } from 'src/app/services/traffic.service';
 
 @Component({
@@ -13,16 +14,27 @@ export class TraficLightComponent implements OnInit {
   public active: boolean = false;
   public basicClass: string = "semaforo";
 
+  public unsuscribe$ = new Subject<void>();
+
   ngOnInit(): void {
 
     this.showColor();
   };
 
+  ngOnDestroy(): void {
+
+    this.unsuscribe$.next();
+    this.unsuscribe$.complete();
+  };
+
   public showColor() {
 
-    this._trafficService.isActive$().subscribe(val => this.active = val);
+    this._trafficService.isActive$()
+    .pipe( takeUntil( this.unsuscribe$ )).subscribe(val => this.active = val);
 
-    this._trafficService.getColor$().subscribe( val => {
+    this._trafficService.getColor$()
+    .pipe( takeUntil( this.unsuscribe$ ))
+    .subscribe( val => {
 
       this.color = val;
       // console.log( this.color );

@@ -3,6 +3,7 @@ import { ExternalLibraryService } from 'src/app/services/external-library.servic
 import { ShortCompany } from './interfaces/company.interface';
 
 import * as Chartist from 'chartist';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'external-library',
@@ -19,18 +20,27 @@ export class ExternalLibraryComponent implements AfterViewInit {
   public data1: any;
   public data2: any;
 
+  private unsuscribe$ = new Subject<void>();
+
   @ViewChild( 'myChart', { static: true })
   chart!: HTMLCanvasElement;
-
 
   ngAfterViewInit(): void {
 
     this.show();
   };
 
+  ngOnDestroy(): void {
+
+    this.unsuscribe$.next();
+    this.unsuscribe$.complete();
+  };
+
   public show() {
 
-    this.externalService.getRequest().subscribe(res => {
+    this.externalService.getRequest()
+    .pipe( takeUntil( this.unsuscribe$ ))
+    .subscribe(res => {
 
       this.companies = res;
       console.log( this.companies );
