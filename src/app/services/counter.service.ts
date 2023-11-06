@@ -6,56 +6,31 @@ import { BehaviorSubject, Observable, Subject, interval, map, takeUntil } from '
 })
 export class CounterService {
 
-  private _counter: number = 0;
-  private _counterVal$ = new BehaviorSubject<number>(0);
-  private _step: number = 0;
-  // private _isUp: boolean = true;
-
+  private _counter$ = new BehaviorSubject<number>(0);
+  private _step$ = new BehaviorSubject<number>(1);
   public stop$ = new Subject<void>();
 
-  private _interval$ = interval( 1000 );
+  public _interval$ = interval( 1000 );
 
   // Getters & Setters
 
-  public setCounterVal( value: number ) {
+  public setCounter( value: number ) {
 
-    this._counterVal$.next( value );
+    this._counter$.next( value );
   };
 
-  public getCounterVal$() {
+  public getCounter$() {
 
-    return this._counterVal$.asObservable();
+    return this._counter$.asObservable();
   };
 
   public setStep( value: number ) {
 
-    this._step = value;
+    this._step$.next( value );
   };
 
-  // public getStep$() {
+  public getStep$() {
 
-  //   return this._step$.asObservable();
-  // };
-
-  // public setIsUp( value: boolean ) {
-
-  //   this._isUp = value;
-  // };
-
-//
-
-  public counterUp(): Observable<number> {
-
-    this._counterVal$.subscribe( val => this._counter = val);
-
-    return this._interval$.pipe(
-      takeUntil( this.stop$ ),
-      map( () => (this._counter) + this._step )
-    );
-  };
-
-  public counterDown() {
-
-
+    return this._step$.asObservable();
   };
 }

@@ -1,5 +1,5 @@
-import { Component, ElementRef, OnInit, ViewChild, inject } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component, OnDestroy, inject } from '@angular/core';
+import { Subject, scan, takeUntil } from 'rxjs';
 import { CounterService } from 'src/app/services/counter.service';
 
 @Component({
@@ -7,88 +7,85 @@ import { CounterService } from 'src/app/services/counter.service';
   templateUrl: './counter.component.html',
   styleUrls: ['./counter.component.css']
 })
-export class CounterComponent implements OnInit {
+export class CounterComponent implements OnDestroy {
 
   public counterService = inject( CounterService );
 
   public counterNumber: number = 0;
-  public active: boolean = false;
+  public active: boolean = true;
   public countUp: boolean = true;
-
   public setInput: number = 0;
+  public stepValue: number = 1;
+  public currentValue: number = 0;
+  public state: string = "Start";
 
-  @ViewChild("stepInput")
-  public stepInput?: ElementRef;
-  public stepValue: number = 0;
+  ngOnDestroy(): void {
 
-  public subscription!: Subscription;
-
-  ngOnInit(): void {
-
-  };
-
-  getStep() {
-
-    if (this.stepInput) {
-
-      this.stepValue = this.stepInput.nativeElement.value;
-    };
+    this.counterService.stop$.complete();
   };
 
   reset() {
 
-    this.counterNumber = 0;
-    // this.counterService.setCounter( 0 );
+    this.currentValue = 0;
+    this.counterService.stop$.next();
+    this.counter();
   };
 
   pause() {
 
+    this.state = "Continue"
+    this.currentValue = this.counterNumber;
     this.counterService.stop$.next();
-
-    if ( this.subscription ) {
-
-      this.subscription.unsubscribe();
-    }
-
   };
 
   counterUp() {
 
     this.countUp = true;
-    // this.counterService.setIsUp( true );
   };
 
   counterDown() {
 
     this.countUp = false;
-    // this.counterService.setIsUp( false );
+  };
+
+  isUp() {
+
+    if ( this.active && this.countUp ) {
+
+      this.counterService._interval$.pipe(
+        takeUntil( this.counterService.stop$ ),
+        scan( (acc, _ ) => acc + parseInt(this.stepValue.toString()), parseInt(this.counterNumber.toString()))
+      ).subscribe( val => this.counterNumber = val);
+    };
+
+    if ( this.active && !this.countUp ) {
+
+      this.counterService._interval$.pipe(
+        takeUntil( this.counterService.stop$ ),
+        scan( (acc, _ ) => acc - parseInt(this.stepValue.toString()), parseInt(this.counterNumber.toString()) )
+      ).subscribe( val => this.counterNumber = val);
+    };
   };
 
   counter() {
 
-     this.counterService.setCounterVal( this.setInput );
-     this.counterService.setStep( this.stepValue );
+    if ( this.currentValue === 0 ) {
 
-    // this.counterService.getCounter$().subscribe( val =>
+      this.counterService.setCounter( this.setInput );
 
-    //   this.counterNumber = val
-    // );
+    } else {
 
-
-
-    if ( this.countUp ) {
-
-      this.subscription = this.counterService.counterUp().subscribe( val => this.counterNumber = val)
-
-
+      this.counterService.setCounter( this.currentValue );
     };
 
-    if ( this.active === true && !this.countUp ) {
+    this.counterService.setStep( this.stepValue );
 
+    this.counterService.getCounter$().pipe(
+      takeUntil( this.counterService.stop$ )).subscribe( val => this.counterNumber = val);
+    this.counterService.getStep$().pipe(
+      takeUntil( this.counterService.stop$ )).subscribe( val => this.stepValue = val );
 
-    };
-
-
+    this.isUp();
   };
 
 }
